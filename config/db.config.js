@@ -4,7 +4,7 @@ const mysql = require('mysql2');
 const dbConn = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : 'Colombia.2021',
+  password : '',
   database : 'antonela_reposteria'
 });
 dbConn.connect(function(err) {
