@@ -7,7 +7,7 @@ function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     return (
-        <div className ="container">
+        <Fragment>
             <div className="login-design">
                 <div className="pastel">
                    <img src={TortaCompleta} alt="" width="2000" height="550" />
@@ -28,7 +28,7 @@ function LoginPage() {
                     </div>
                 </div>
             </div>
-        </div>
+        </Fragment>
     )
 }
 
