@@ -1,6 +1,5 @@
 import React, {Fragment} from "react";
 import LoginPage from "./login/LoginPage";
-import RegisterPage from "./register/RegisterPage";
 import ProductosPage from "./productos/ProductosPage";
 import VentasPage from "./admon-ventas/VentasPage";
 import GestionUsuarios from "./gestion-usuarios/GestionUsuarios";
@@ -19,9 +18,6 @@ function App() {
         </Route>
         <Route path="/login" exact>
           <LoginPage />
-        </Route>
-        <Route path="/register" exact>
-          <RegisterPage />
         </Route>
         <Route path="/productos" exact>
           <ProductosPage />
