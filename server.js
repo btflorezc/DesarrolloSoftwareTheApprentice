@@ -12,17 +12,13 @@ app.use(bodyParser.json())
 app.get('/', (req, res) => {
   res.send("ANTONELA REPOSTERIA");
 });
-const productoRoutes = require('./src/routes/producto.routes')
-const usuarioRoutes = require('./src/routes/usuario.routes')
+// Require employee routes
 const ventaRoutes = require('./src/routes/venta.routes')
 const prod_ventRoutes = require('./src/routes/prod_vent.routes')
 // using as middleware
-app.use('/api/v1/producto', productoRoutes)
-app.use('/api/v1/usuario', usuarioRoutes)
 app.use('/api/v1/venta', ventaRoutes)
 app.use('/api/v1/prod_vent', prod_ventRoutes)
-/
-
+// listen for request
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });
