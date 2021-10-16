@@ -1,35 +1,41 @@
 import React, {Fragment} from "react";
-import LoginPage from "./login/LoginPage";
 import ProductosPage from "./productos/ProductosPage";
 import VentasPage from "./admon-ventas/VentasPage";
 import GestionUsuarios from "./gestion-usuarios/GestionUsuarios";
 import ActualizarProductosPage from "./actualizar-productos/ActualizarProductosPage";
+import HomePage from "./home/HomePage";
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import NavbarComponent from "./shared/components/navbar/NavbarComponent";
+import ForbidenComponent from "./shared/components/forbiden/ForbidenComponent";
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 function App() {
+  const {isAuthenticated} = useAuth0();
+  const validateUserRole = () => {
+    
+  }
   return (
     <Router>
       <NavbarComponent></NavbarComponent>
       <Switch>
       <Route path="/" exact>
-          <h1>Home</h1>
-        </Route>
-        <Route path="/login" exact>
-          <LoginPage />
+          <HomePage/>
         </Route>
         <Route path="/productos" exact>
-          <ProductosPage />
+        {isAuthenticated ? <ProductosPage />: <ForbidenComponent /> }
         </Route>
         <Route path="/actualizar-productos" exact>
-          <ActualizarProductosPage />
+        {isAuthenticated ?<ActualizarProductosPage />: <ForbidenComponent /> }
         </Route>
         <Route path="/admon-ventas" exact>
-          <VentasPage />
+        {isAuthenticated ?<VentasPage />: <ForbidenComponent /> }
         </Route>
         <Route path="/gestion-usuarios" exact>
-          <GestionUsuarios/>
+        {isAuthenticated ?<GestionUsuarios/>: <ForbidenComponent /> }
+        </Route>
+        <Route path="forbiden" exact>
+          <ForbidenComponent />
         </Route>
       </Switch>
     
