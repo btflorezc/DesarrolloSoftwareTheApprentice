@@ -5,10 +5,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 function NavbarComponent(props) {
     const { loginWithRedirect } = useAuth0();
-
+    const { logout } = useAuth0();
+    const {user, isAuthenticated} = useAuth0();
     let title = props.title;
-
-    console.log(props.title);
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -20,15 +19,15 @@ function NavbarComponent(props) {
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
                         <Link to="/" className="nav-link active" aria-current="page" href="#">Home</Link>
-                        <Link to="/login" className="nav-link" href="#">Login</Link>
-                        <a className="nav-link active" onClick={() => loginWithRedirect()}>Log in</a>
+                        <Link className="nav-link" onClick={() => loginWithRedirect()}>Login</Link>
+                        {isAuthenticated ?<Link className="nav-link" onClick={() => logout({ returnTo: window.location.origin })}>Logout</Link>: null}
                         <li className="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Administración Productos
+                                Administrar Productos
                             </a>
                             <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                                 <li><Link to="/productos/" className="dropdown-item" href="#">Registrar Producto</Link></li>
-                                <li><Link to="/actualizar-productos/" className="dropdown-item" href="#">Actualizar Producto</Link></li>
+                                <li><Link to="/productos/actualizar-productos/" className="dropdown-item" href="#">Actualizar Producto</Link></li>
                                 <li><a className="dropdown-item" href="#">Listar Productos</a></li>
                             </ul>
                         </li>
@@ -36,6 +35,10 @@ function NavbarComponent(props) {
                         <Link to="/gestion-usuarios" className="nav-link" href="#">Gestión de Usuarios</Link>
                     </div>
                 </div>
+                <form class="d-flex">
+                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                            <button className="btn btn-outline-success" type="submit">{isAuthenticated ? user.name: "User"}</button>
+                </form>
             </div>
         </nav>
     );

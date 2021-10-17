@@ -2,7 +2,7 @@ import React, {Fragment} from "react";
 import ProductosPage from "./productos/ProductosPage";
 import VentasPage from "./admon-ventas/VentasPage";
 import GestionUsuarios from "./gestion-usuarios/GestionUsuarios";
-import ActualizarProductosPage from "./actualizar-productos/ActualizarProductosPage";
+import ActualizarProductosPage from "./productos/actualizar-productos/ActualizarProductosPage";
 import HomePage from "./home/HomePage";
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import NavbarComponent from "./shared/components/navbar/NavbarComponent";
@@ -25,7 +25,7 @@ function App() {
         <Route path="/productos" exact>
         {isAuthenticated ? <ProductosPage />: <ForbidenComponent /> }
         </Route>
-        <Route path="/actualizar-productos" exact>
+        <Route path="/productos/actualizar-productos" exact>
         {isAuthenticated ?<ActualizarProductosPage />: <ForbidenComponent /> }
         </Route>
         <Route path="/admon-ventas" exact>

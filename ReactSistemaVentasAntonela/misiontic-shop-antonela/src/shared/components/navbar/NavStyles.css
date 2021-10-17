@@ -3,18 +3,26 @@
 }
 
 .nav-link{
-    margin-left: 80px;
-    line-height: 1.6rem;
+    margin-left: 30px;
+    line-height: 1.62rem;
     font-size: 1,6rem;
     font-family: Verdana;
-    padding: 0.5rem 0;
+    padding: 0.5rem;
     transition: 0.3s ease-in-out all;
-    font-weight: 300;
+    font-weight: 500;
+    color: white;
 }
-.navbar-nav > .active > a {
-    color: red;
-    background-color: white;    
-  }
-  .nav-item > a:hover {
-    color: aqua;
-  }
+
+
+
+.btn-outline-success{
+  background-color: white;
+  border: 1px solid #58bbae;
+}
+
+.btn-outline-success:hover {
+  cursor: pointer;
+  background-color: #ffffff;
+  color: #58bbae;
+  border: 2px solid #58bbae
+}
