@@ -28,7 +28,7 @@ function NavbarComponent(props) {
                             <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                                 <li><Link to="/productos/" className="dropdown-item" href="#">Registrar Producto</Link></li>
                                 <li><Link to="/productos/actualizar-productos/" className="dropdown-item" href="#">Actualizar Producto</Link></li>
-                                <li><a className="dropdown-item" href="#">Listar Productos</a></li>
+                                <li><Link to="/productos/listar-productos/" className="dropdown-item" href="#">Listar Productos</Link></li>
                             </ul>
                         </li>
                         <Link to="/admon-ventas" className="nav-link" href="#">Administrar Ventas</Link>

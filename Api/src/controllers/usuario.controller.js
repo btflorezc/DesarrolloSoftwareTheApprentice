@@ -24,8 +24,15 @@ exports.create = function(req, res) {
       });
   }
 };
-exports.findById = function(req, res) {
-  usuario.findById(req.params.id, function(err, usuario) {
+exports.findById_usuarios = function(req, res) {
+  usuario.findById_usuarios(req.params.id_usuarios, function(err, usuario) {
+  if (err)
+  res.send(err);
+  res.json(usuario);
+});
+};
+exports.findByEmail = function(req, res) {
+  usuario.findByEmail(req.params.email, function(err, usuario) {
   if (err)
   res.send(err);
   res.json(usuario);

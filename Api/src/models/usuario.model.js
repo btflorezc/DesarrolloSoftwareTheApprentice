@@ -12,7 +12,7 @@ var usuario = function (usuario) {
   this.telefono_usuario = usuario.telefono_usuario;
 };
 usuario.create = function (newPro, result) {
-  dbConn.query("INSERT INTO usuarios set ?", newPro, function (err, res) {
+  dbConn.query("INSERT INTO usuario set ?", newPro, function (err, res) {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -20,11 +20,22 @@ usuario.create = function (newPro, result) {
     else {
       console.log(res.insertId);
       result(null, res.insertId);
+    }_
+  });
+};
+usuario.findById_usuarios = function (id_usuarios, result) {
+  dbConn.query("Select * from usuario where id_usuarios = ? ", {id_usuarios}, function (err, res) {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+    }
+    else {
+      result(null, res);
     }
   });
 };
-usuario.findById = function (id, result) {
-  dbConn.query("Select * from usuario where id_usuarios = ? ", id, function (err, res) {
+usuario.findByEmail = function (email, result) {
+  dbConn.query("Select * from usuario where email = ? ", {email}, function (err, res) {
     if (err) {
       console.log("error: ", err);
       result(err, null);
