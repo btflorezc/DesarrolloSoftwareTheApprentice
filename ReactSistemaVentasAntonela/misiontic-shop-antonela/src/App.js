@@ -21,19 +21,19 @@ function App() {
           <HomePage />
         </Route>
         <Route path="/productos" exact>
-          {isAuthenticated ? <ProductosPage /> : <ForbidenComponent />}
+          <ProductosPage />
         </Route>
         <Route path="/productos/actualizar-productos" exact>
-          {isAuthenticated ? <ActualizarProductosPage /> : <ForbidenComponent />}
+          <ActualizarProductosPage /> 
         </Route>
         <Route path="/productos/listar-productos" exact>
           <ListarPage />
         </Route>
         <Route path="/admon-ventas" exact>
-          {isAuthenticated ? <VentasPage /> : <ForbidenComponent />}
+          <VentasPage /> 
         </Route>
         <Route path="/gestion-usuarios" exact>
-          {isAuthenticated ? <GestionUsuarios /> : <ForbidenComponent />}
+          <GestionUsuarios /> 
         </Route>
         <Route path="forbiden" exact>
           <ForbidenComponent />

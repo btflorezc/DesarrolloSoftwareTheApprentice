@@ -19,10 +19,10 @@ function NavbarComponent(props) {
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
                         <Link to="/" className="nav-link active" aria-current="page" href="#">Home</Link>
-                        <Link className="nav-link" onClick={() => loginWithRedirect()}>Login</Link>
-                        {isAuthenticated ?<Link className="nav-link" onClick={() => logout({ returnTo: window.location.origin })}>Logout</Link>: null}
+                        {isAuthenticated? null:<a className="nav-link" onClick={() => loginWithRedirect()}>Login</a>}
+                        {isAuthenticated ?<a className="nav-link" onClick={() => logout({ returnTo: window.location.origin })}>Logout</a>: null}
                         <li className="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a className="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Administrar Productos
                             </a>
                             <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
@@ -35,7 +35,7 @@ function NavbarComponent(props) {
                         <Link to="/gestion-usuarios" className="nav-link" href="#">Gestión de Usuarios</Link>
                     </div>
                 </div>
-                <form class="d-flex">
+                <form className="d-flex">
                             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                             <button className="btn btn-outline-success" type="submit">{isAuthenticated ? user.name: "User"}</button>
                 </form>

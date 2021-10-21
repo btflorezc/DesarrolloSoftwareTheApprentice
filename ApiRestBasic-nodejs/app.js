@@ -22,6 +22,12 @@ app.get("/get-usuario", async (req,res) =>{
     const[rows, fields] = await connection.execute(`SELECT * FROM usuarios where email='${email}'`);
     res.json(rows[0])
 })
+
+app.get("/get-user", async (req,res) =>{
+    const email = req.query.email;
+    const[rows, fields] = await connection.execute(`SELECT * FROM users where email='${email}'`);
+    res.json(rows[0])
+})
 app.post("/add-producto", async(req, res) => {
     const [id_producto, descripcion_producto, estado_producto, precio_producto] = req.body;
     await connection.execute(`INSERT INTO productos (id_producto, descripcion_producto, estado_producto, precio_producto) VALUES('${id_producto}','${descripcion_producto}','${estado_producto}','${precio_producto}')`);
