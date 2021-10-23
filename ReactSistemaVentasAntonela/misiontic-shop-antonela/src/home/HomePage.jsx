@@ -8,7 +8,7 @@ function HomePage() {
     const [validUser, setValidUser] =useState(false);
     const {loginWithRedirect} = useAuth0();
     const validateUserRole = async () =>{
-      const response = await fetch(`http://localhost:3001/get-user?email=${user.email}`);
+      const response = await fetch(`http://localhost:3001/get-usuario?email=${user.email}`);
       const jsonResponse = await response.json();
       return jsonResponse;
   
@@ -28,12 +28,12 @@ function HomePage() {
       }
       
       if(userData){
-        if(userData.role != "invited"){
+        if(userData.rol != "invited"){
           setValidUser(true);
-          localStorage.setItem("state", userData.role);
+          localStorage.setItem("state", userData.rol);
         }
         else{
-            localStorage.setItem("state", userData.role);
+            localStorage.setItem("state", userData.rol);
             setValidUser(false)
         }
       }
