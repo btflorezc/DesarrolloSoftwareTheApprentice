@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Link } from 'react-router-dom'
 import '../navbar/NavStyles.css';
@@ -32,11 +33,21 @@ function NavbarComponent(props) {
                             </ul>
                         </li>
                         <Link to="/admon-ventas" className="nav-link" href="#">Administrar Ventas</Link>
-                        <Link to="/gestion-usuarios" className="nav-link" href="#">Gestión de Usuarios</Link>
+                        <li className="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Gestión de Usuarios
+                            </a>
+                            <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                                <li><Link to="/gestion-usuarios/gestion-usuarios-registrar/" className="dropdown-item" href="#">Registrar Usuario</Link></li>
+                                <li><Link to="/gestion-usuarios/gestion-usuarios-actualizar/" className="dropdown-item" href="#">Actualizar Usuario</Link></li>
+                                <li><Link to="/gestion-usuarios/gestion-usuarios-eliminar/" className="dropdown-item" href="#">Eliminar Usuario</Link></li>
+                                <li><Link to="/gestion-usuarios/gestion-usuarios-listar/" className="dropdown-item" href="#">Listar Usuarios</Link></li>
+                            </ul>
+                        </li>
                     </div>
                 </div>
-                <form className="d-flex">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                <form class="d-flex">
+{/*                             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" /> */}
                             <button className="btn btn-outline-success" type="submit">{isAuthenticated ? user.name: "User"}</button>
                 </form>
             </div>

@@ -1,7 +1,10 @@
-import React, { Fragment } from "react";
+import React from "react";
 import ProductosPage from "./productos/ProductosPage";
 import VentasPage from "./admon-ventas/VentasPage";
-import GestionUsuarios from "./gestion-usuarios/GestionUsuarios";
+import GestionUsuariosRegistrarPage from "./gestion-usuarios/gestion-usuarios-registrar/GestionUsuariosRegistrarPage";
+import GestionUsuariosActualizarPage from "./gestion-usuarios/gestion-usuarios-actualizar/GestionUsuariosActualizarPage";
+import GestionUsuariosEliminarPage from "./gestion-usuarios/gestion-usuarios-eliminar/GestionUsuariosEliminarPage";
+import GestionUsuariosListarPage from "./gestion-usuarios/gestion-usuarios-listar/GestionUsuariosListarPage";
 import ActualizarProductosPage from "./productos/actualizar-productos/ActualizarProductosPage";
 import ListarPage from "./productos/listar-productos/ListarPage";
 import HomePage from "./home/HomePage";
@@ -9,9 +12,10 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import NavbarComponent from "./shared/components/navbar/NavbarComponent";
 import ForbidenComponent from "./shared/components/forbiden/ForbidenComponent";
 import { useAuth0 } from "@auth0/auth0-react";
-
+/* import grantAccess from "./productos/listar-productos/ListarPage"; */
 
 function App() {
+const {isAuthenticated} = useAuth0();
 
   return (
     <Router>
@@ -32,8 +36,17 @@ function App() {
         <Route path="/admon-ventas" exact>
           <VentasPage /> 
         </Route>
-        <Route path="/gestion-usuarios" exact>
-          <GestionUsuarios /> 
+        <Route path="/gestion-usuarios/gestion-usuarios-listar" exact>
+          <GestionUsuariosListarPage />
+        </Route>
+        <Route path="/gestion-usuarios/gestion-usuarios-registrar" exact>
+        {isAuthenticated ?<GestionUsuariosRegistrarPage />: <ForbidenComponent /> }
+        </Route>
+        <Route path="/gestion-usuarios/gestion-usuarios-actualizar" exact>
+        {isAuthenticated ?<GestionUsuariosActualizarPage />: <ForbidenComponent /> }
+        </Route>
+        <Route path="/gestion-usuarios/gestion-usuarios-eliminar" exact>
+        {isAuthenticated ?<GestionUsuariosEliminarPage />: <ForbidenComponent /> }
         </Route>
         <Route path="forbiden" exact>
           <ForbidenComponent />
