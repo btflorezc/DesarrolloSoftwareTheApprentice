@@ -45,11 +45,13 @@ app.post("/add-usuario", async(req, res) => {
 })
 
 app.put('/update/id_usuarios', async(req, res) =>{
+    console.log("Actualizando Usuario");
     try{
-        const {id_usuarios} = req.params;
-        const {tipo_documento, num_identificacion, nombre_usuario, estado, rol, email, telefono_usuario} = req.body;
+        /* const {id_usuarios} = req.params; */
+        const {id_usuarios, tipo_documento, num_identificacion, nombre_usuario, estado, rol, email, telefono_usuario} = req.body;
         await connection.execute ('UPDATE usuarios SET tipo_documento = \''+tipo_documento+'\', num_identificacion = \''+num_identificacion+'\', nombre_usuario = \''+nombre_usuario+'\', estado = \''+estado+'\', rol = \''+rol+'\', email = \''+email+'\', telefono_usuario = \''+telefono_usuario+'\' WHERE id_usuarios = \''+id_usuarios+'\'')
         res.json({status:"OK"});
+        console.log("Usuario actualizado");
     }
     catch (error) {
         console.log(error);
@@ -59,7 +61,7 @@ app.put('/update/id_usuarios', async(req, res) =>{
 
 //Consulta sólo por Id Usuario
 
-app.get('/get-usuario/id_usuarios/1', async (req, res) =>{
+/* app.get('/get-usuario/{id_usuarios}', async (req, res) =>{
     try {
     const {id_usuarios} = req.params
     await connection.execute ('SELECT tipo_documento = \''+tipo_documento+'\', num_identificacion = \''+num_identificacion+'\', nombre_usuario = \''+nombre_usuario+'\', estado = \''+estado+'\', rol = \''+rol+'\', email = \''+email+'\', telefono_usuario = \''+telefono_usuario+'\' FROM usuarios WHERE id_usuarios = \''+id_usuarios+'\'')
@@ -69,15 +71,37 @@ app.get('/get-usuario/id_usuarios/1', async (req, res) =>{
         console.log(error);
         res.json(error)
     }
-})
+}) */
 
-app.get("/get-usuario/id_usuarios/", async (request, response) => {
-    const {id_usuarios} = request.params
-    await connection.execute ('SELECT tipo_documento = \''+tipo_documento+'\', num_identificacion = \''+num_identificacion+'\', nombre_usuario = \''+nombre_usuario+'\', estado = \''+estado+'\', rol = \''+rol+'\', email = \''+email+'\', telefono_usuario = \''+telefono_usuario+'\' FROM usuarios WHERE id_usuarios = \''+id_usuarios+'\'')
-    res.json({status:"OK"});
+app.get("/get-usuarios/:id_usuarios", async (request, response) => {
+    const id_usuarios = request.params.id_usuarios;
+    const consulta = 'SELECT id_usuarios, tipo_documento, num_identificacion, nombre_usuario, estado, rol, email, telefono_usuario FROM usuarios WHERE id_usuarios = \''+id_usuarios+'\'';
+    console.log(consulta);
+    const [rows, fields] = await connection.execute(consulta);
+    /* response.json({status:"OK"}); */
     console.log({data:rows});
     response.json({data: rows});
+
 });
+
+/* Eliminar un registro, consultando por ID_Usuario */
+
+app.delete("/delete-usuarios/:id_usuarios", async(request, response) =>{
+    console.log("Eliminando Usuario");
+    try{
+        const id_usuarios = request.params.id_usuarios;
+        const consulta = 'DELETE FROM usuarios WHERE id_usuarios = \''+id_usuarios+'\'';
+        console.log(consulta);
+        const [rows, fields] = await connection.execute(consulta);
+        response.json({status:"OK"});
+        console.log("Usuario eliminado");
+    }
+    catch (error) {
+        console.log(error);
+        response.json(error)
+    }
+})
+
 /* app.delete("/delete-usuario", async(req, res) => {
     try{
         console.log(req.body)
