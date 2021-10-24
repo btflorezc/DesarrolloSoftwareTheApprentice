@@ -1,33 +1,54 @@
-import React, { Fragment, useState } from 'react';
-import '../productos/productStyles.css';
-function ProductosPage() {
+import React, { useState } from 'react'
 
+const ProductosPage = () => {
+    const [id_producto, setId_Producto] = useState(0);
+    const [descripcion_producto, setDescripcion_Producto] = useState('');
+    const [estado_producto, setEstado_Producto] = useState(0);
+    const [precio_producto, setPrecio_Producto] = useState('');
+    
+    const addProducto = async() => {
+        const productoData = {
+            id_producto: id_producto,
+            descripcion_producto: descripcion_producto,
+            estado_producto: estado_producto,
+            precio_producto: precio_producto,
+            
+        }
+        const response = await fetch('http://localhost:3001/add-producto', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(productoData)
+          });
+          const jsonResponse = await response.json();
+          console.log(jsonResponse);
+      
+    }
     return (
-        <Fragment>
-            <div>
-                <header>
-                    <h4 className="Actualizar">Registrar Producto</h4>
-                </header>
+        <div className='container' >
+            <form>
                 <div className="mb-3">
-                    <label  for="ID" className="form-label">Identificador Único*:</label><br/>
-                    <input type="text" class="form-control" id="ID" name="ID"/>
+                    <label for="id_producto">ID Producto*:</label>
+                    <input type="number" className="form-control" id="id_usuarios" name="id_producto" onChange={(e) => setId_Producto(e.target.value) } />
                 </div>
                 <div className="mb-3">
-                    <label  for="Nombre">Descripción*:</label><br/>
-                    <input type="text" className="form-control" id="Nombre" name="Nombre"/>
+                    <label for="descripcion_producto">Descripcion Producto*:</label>
+                    <input type="text" class="form-control" id="descripcion_producto" name="descripcion_producto" onChange={(e) => setDescripcion_Producto(e.target.value) } />
                 </div>
                 <div className="mb-3">
-                    <label  for="Descripción">Valor Unitario*:</label><br/>
-                    <input type="text" className="form-control" id="Descripción" name="Descripción"/>
+                    <label for="estado_producto">Estado Producto*:</label>
+                    <input type="text" className="form-control" id="estado_producto" name="estado_producto" onChange={(e) => setEstado_Producto(e.target.value) } />
                 </div>
                 <div className="mb-3">
-                    <label  for="Estado">Estado*:</label><br/>
-                    <input type="text" className="form-control" id="Estado" name="Estado"/>
+                    <label for="precio_producto">Precio Producto*:</label>
+                    <input type="text" className="form-control" id="precio_producto" name="precio_producto" onChange={(e) => setPrecio_Producto(e.target.value) } />
                 </div>
-                <input type="button" className="button1" value="Registar" type="submit" />
-                <input type="button" className="button2" value="Cancelar" onclick="window.location.href='GestionarProductosPage.jsx'"></input>
-            </div>
-        </Fragment>
+                
+                <button type="button" onClick={addProducto} class="btn btn-outline-success">Registrar</button>
+            </form>
+        </div>
     )
 }
-export default ProductosPage;
+
+export default ProductosPage

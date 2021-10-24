@@ -39,7 +39,7 @@ function GestionUsuariosEliminarPage(){
             try {
                 limpiarCampos();
                 var src = document.getElementById('search').value;
-                const url="http://localhost:3001/get-usuarios/"+src;
+                const url="http://localhost:3001/get-user/"+src;
                 console.log(url);
                 const response = await fetch(url); 
                 const jsonResponse = await response.json();

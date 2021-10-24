@@ -4,39 +4,90 @@ import ForbidenComponent from '../../shared/components/forbiden/ForbidenComponen
 import { Redirect } from 'react-router';
 
 function ActualizarProductosPage() {
-    const {isAuthenticated} = useAuth0();
-    if (localStorage.getItem("state") == "user") {
-        return (
-            <Fragment>
-                <div>
-                    <header>
-                        <h4 className="Actualizar">Actualizar Producto</h4>
-                    </header>
-                    <div className="mb-3">
-                        <label for="ID" className="form-label">Identificador Único*:</label><br />
-                        <input type="text" class="form-control" id="ID" name="ID" />
-                    </div>
-                    <div className="mb-3">
-                        <label for="Nombre">Descripción*:</label><br />
-                        <input type="text" className="form-control" id="Nombre" name="Nombre" />
-                    </div>
-                    <div className="mb-3">
-                        <label for="Descripción">Valor Unitario*:</label><br />
-                        <input type="text" className="form-control" id="Descripción" name="Descripción" />
-                    </div>
-                    <div className="mb-3">
-                        <label for="Estado">Estado*:</label><br />
-                        <input type="text" className="form-control" id="Estado" name="Estado" />
-                    </div>
-                    <input type="button" className="button1" value="Actualizar" type="submit" />
-                    <input type="button" className="button2" value="Cancelar"></input>
+    const limpiarCampos  = async (search) =>{
+        document.getElementById('id_producto').value = "";
+        document.getElementById('descripcion_producto').value = "";
+        document.getElementById('estado_producto').value = "";
+        document.getElementById('precio_producto').value = "";
+        
+    }
+
+
+    const addProducto = async () => {
+        const productoData = {
+            id_producto: document.getElementById('id_producto').value,
+            descripcion_producto: document.getElementById('descripcion_producto').value,
+            estado_producto: document.getElementById('estado_producto').value,
+            precio_producto: document.getElementById('precio_producto').value
+            
+        }
+        const response = await fetch('http://localhost:3001/update/id_producto', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(productoData)
+        });
+        const jsonResponse = await response.json();
+        console.log(jsonResponse);
+    }
+
+    const getProducto = async (search) => {
+        try {
+            limpiarCampos();
+            var src = document.getElementById('search').value;
+            const url = "http://localhost:3001/get-producto" + src;
+            console.log(url);
+            const response = await fetch(url);
+            const jsonResponse = await response.json();
+           
+            console.log(jsonResponse);
+            document.getElementById('id_producto').value = jsonResponse.data[0].id_producto;
+            document.getElementById('descripcion_producto').value = jsonResponse.data[0].descripcion_producto;
+            document.getElementById('estado_producto').value = jsonResponse.data[0].estado_producto;
+            document.getElementById('precio_producto').value = jsonResponse.data[0].precio_producto;
+            
+
+            console.log(jsonResponse.data);
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    return (
+
+
+
+        <>
+
+        <div className='container'></div><div class="input-group">
+            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                aria-describedby="search-addon" id="search" name="search" />
+            <button type="button" onClick={getProducto} className="btn btn-outline-primary" id="boton">Buscar Id Producto</button>
+        </div>
+            <form>
+                <div className="mb-3">
+                    <label for="id_producto">ID Producto*:</label>
+                    <input type="number" className="form-control" id="id_producto" name="id_producto" disabled="true" /* value = {tipo} */ /* onChange={(e) => setTipo_Documento(e.target.value) *//* } */ />
                 </div>
-            </Fragment>
-        )
-    }
-    else {
-        return <Redirect to="/"></Redirect>
-    }
+                <div className="mb-3">
+                    <label for="descripcion_producto">Descripcion Producto*:</label>
+                    <input type="text" className="form-control" id="descripcion_producto" name="descripcion_producto" /* value = {tipo} */ /* onChange={(e) => setTipo_Documento(e.target.value) *//* } */ />
+                </div>
+                <div className="mb-3">
+                    <label for="estado_producto">Estado Producto*:</label>
+                    <input type="number" className="form-control" id="estado_producto" name="estado_producto" /* value={num} */ /* onChange={(e) => setNum_Identificacion(e.target.value) *//* } */ />
+                </div>
+                <div className="mb-3">
+                    <label for="precio_producto">Precio Producto*:</label>
+                    <input type="text" className="form-control" id="precio_producto" name="precio_producto" /* value= {nombre} */ /* onChange={(e) => setNombre_Usuario(e.target.value) *//* } */ />
+                </div>
+                
+                <button type="button" onClick={addProducto} className="btn btn-outline-success">Actualizar</button>
+            </form></>
+    )
+
 }
 
 export default ActualizarProductosPage;

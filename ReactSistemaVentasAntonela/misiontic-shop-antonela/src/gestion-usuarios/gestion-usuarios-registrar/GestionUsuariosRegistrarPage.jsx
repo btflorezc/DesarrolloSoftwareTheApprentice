@@ -20,7 +20,7 @@ const GestionUsuariosRegistrarPage = () => {
             email: email,
             telefono_usuario: telefono_usuario
         }
-        const response = await fetch('http://localhost:3001/add-usuario', {
+        const response = await fetch('http://localhost:3001/add-user', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'

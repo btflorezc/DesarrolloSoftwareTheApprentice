@@ -1,10 +1,12 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import ForbidenComponent from '../../shared/components/forbiden/ForbidenComponent';
 
 function ListarPage() {
   const [productos, setProductos] = useState([]);
-
+  const {isAuthenticated} =useAuth0();
+  const [validUser, setValidUser] =useState(false);
+  
   const getProductos = async () => {
     try {
       const response = await fetch("http://localhost:3001/get-producto");
@@ -27,13 +29,23 @@ function ListarPage() {
     }
 
   }
-
+ 
+  const grantAccess=()=>{
+    if(localStorage.getItem("state")=="user"){
+      setValidUser(true)
+    }else{
+      setValidUser(false)
+    }
+  }
+        
+  
   useEffect(() => {
+    grantAccess();
     getProductos();
-  },[]);
+  },[isAuthenticated,validUser]);
     return (
       <div className="container">
-        <table className="table">
+        {validUser?<table className="table">
           <thead>
             <tr>
               <th scope="col">id</th>
@@ -45,10 +57,12 @@ function ListarPage() {
           <tbody>
             {productos}
           </tbody>
-        </table>
+        </table>:<ForbidenComponent/>}
       </div>
     )
   
 }
+
+
 
 export default ListarPage
