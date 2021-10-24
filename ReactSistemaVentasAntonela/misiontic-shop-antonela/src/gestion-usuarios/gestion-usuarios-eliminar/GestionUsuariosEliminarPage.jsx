@@ -61,7 +61,9 @@ function GestionUsuariosEliminarPage(){
         }
     
         return (
-            <><div className='container'></div><div class="input-group">
+            <>
+            <h4>Gestión de Usuarios: Eliminar Usuario</h4>            
+            <div className='container'></div><div class="input-group">
                 <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
                     aria-describedby="search-addon" id="search" name="search"/>
                 <button type="button" onClick={getUsuarios} class="btn btn-outline-primary">Buscar Id Usuario</button>

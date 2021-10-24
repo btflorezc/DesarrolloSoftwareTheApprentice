@@ -1,6 +1,9 @@
 import React from "react";
 /* import ProductosPage from "./productos/ProductosPage"; */
-import VentasPage from "./admon-ventas/VentasPage";
+import AdministradorVentasRegistrarPage from "./admon-ventas/admon-ventas-registrar/AdministradorVentasRegistrarPage";
+import AdministradorVentasActualizarPage from "./admon-ventas/admon-ventas-actualizar/AdministradorVentasActualizarPage";
+import AdministradorVentasBuscarPage from "./admon-ventas/admon-ventas-buscar/AdministradorVentasBuscarPage";
+import AdministradorVentasListarPage from "./admon-ventas/admon-ventas-listar/AdministradorVentasListarPage";
 import GestionUsuariosRegistrarPage from "./gestion-usuarios/gestion-usuarios-registrar/GestionUsuariosRegistrarPage";
 import GestionUsuariosActualizarPage from "./gestion-usuarios/gestion-usuarios-actualizar/GestionUsuariosActualizarPage";
 import GestionUsuariosEliminarPage from "./gestion-usuarios/gestion-usuarios-eliminar/GestionUsuariosEliminarPage";
@@ -33,8 +36,17 @@ const {isAuthenticated} = useAuth0();
         <Route path="/productos/listar-productos" exact>
           <ListarPage />
         </Route>
-        <Route path="/admon-ventas" exact>
-        {isAuthenticated ?<VentasPage />: <ForbidenComponent /> }
+        <Route path="/admon-ventas/admon-ventas-listar" exact>
+          <AdministradorVentasListarPage />
+        </Route>
+        <Route path="/admon-ventas/admon-ventas-registrar" exact>
+        {isAuthenticated ?<AdministradorVentasRegistrarPage />: <ForbidenComponent /> }
+        </Route>
+        <Route path="/admon-ventas/admon-ventas-actualizar" exact>
+        {isAuthenticated ?<AdministradorVentasActualizarPage />: <ForbidenComponent /> }
+        </Route>
+        <Route path="/admon-ventas/admon-ventas-buscar" exact>
+        {isAuthenticated ?<AdministradorVentasBuscarPage />: <ForbidenComponent /> }
         </Route>
         <Route path="/gestion-usuarios/gestion-usuarios-listar" exact>
           <GestionUsuariosListarPage />

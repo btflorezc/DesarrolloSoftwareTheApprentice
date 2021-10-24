@@ -67,7 +67,7 @@ function GestionUsuariosActualizarPage() {
 
 
         <>
-
+        <h4>Gestión de Usuarios: Actualizar Usuario</h4>
         <div className='container'></div><div class="input-group">
             <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
                 aria-describedby="search-addon" id="search" name="search" />

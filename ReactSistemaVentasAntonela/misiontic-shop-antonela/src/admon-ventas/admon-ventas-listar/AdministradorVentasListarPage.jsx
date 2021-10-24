@@ -2,27 +2,27 @@ import { useAuth0 } from '@auth0/auth0-react';
 import React, { useState, useEffect } from 'react'
 import ForbidenComponent from '../../shared/components/forbiden/ForbidenComponent';
 
-function GestionUsuariosListarPage() {
-    const [usuarios, setUsuarios] = useState([]);
+function AdministradorVentasListarPage() {
+    const [ventas, setVentas] = useState([]);
     const {user,isAuthenticated} = useAuth0();
-    const getUsuarios = async () => {
+    const getVentas = async () => {
         try {
-            const response = await fetch("http://localhost:3001/get-usuario");
+            const response = await fetch("http://localhost:3001/get-venta");
             const jsonResponse = await response.json();
-            const responseUsuarios = jsonResponse.data;
-            const listUsuarios = responseUsuarios.map((usuarios) =>
+            const responseVentas = jsonResponse.data;
+            const listVentas = responseVentas.map((ventas) =>
                 <tr>
-                    <th scope="row">{usuarios.id_usuarios}</th>
-                    <td>{usuarios.tipo_documento}</td>
-                    <td>{usuarios.num_identificacion}</td>
-                    <td>{usuarios.nombre_usuario}</td>
-                    <td>{usuarios.estado}</td>
-                    <td>{usuarios.rol}</td>
-                    <td>{usuarios.email}</td>
-                    <td>{usuarios.telefono_usuario}</td>
+                    <th scope="row">{ventas.id_venta}</th>
+                    <td>{ventas.valor_total_venta}</td>
+                    <td>{ventas.id_producto}</td>
+                    <td>{ventas.cantidad}</td>
+                    <td>{ventas.precio_unitario_producto}</td>
+                    <td>{ventas.fecha_venta}</td>
+                    <td>{ventas.documento_identificacion_cliente}</td>
+                    <td>{ventas.nombre_cliente}</td>
                 </tr>
             );
-            setUsuarios(listUsuarios)
+            setVentas(listVentas)
 
             console.log(jsonResponse.data);
         }
@@ -58,29 +58,29 @@ function GestionUsuariosListarPage() {
     }
   }
     useEffect(() => {
-        getUsuarios();
+        getVentas();
     }, []);
     if(grantAccess){
 
     
         return (
             <div className="container">
-                <h4>Gestión de Usuarios: Usuarios</h4>
+                <h4>Administrador Ventas: Ventas</h4>
                 <table class="table">
                       <thead>
                         <tr>
-                            <th scope="col">ID Usuario</th>
-                            <th scope="col">Tipo Documento</th>
-                            <th scope="col">Número Identificación</th>
-                            <th scope="col">Nombre Completo</th>
-                            <th scope="col">Estado</th>
-                            <th scope="col">Rol</th>
-                            <th scope="col">Correo Electrónico</th>
-                            <th scope="col">Número Contacto</th>
+                            <th scope="col">ID Venta</th>
+                            <th scope="col">Valor Total de Venta</th>
+                            <th scope="col">Id Producto</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Precio Unitario de Producto</th>
+                            <th scope="col">Fecha Venta</th>
+                            <th scope="col">Documento de Identificación Cliente</th>
+                            <th scope="col">Nombre Cliente</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {usuarios}
+                        {ventas}
                     </tbody>
                 </table>
             </div>
@@ -91,4 +91,4 @@ function GestionUsuariosListarPage() {
         }
 }
 
-export default GestionUsuariosListarPage;
+export default AdministradorVentasListarPage;

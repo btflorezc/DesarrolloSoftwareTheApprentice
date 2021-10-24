@@ -130,6 +130,58 @@ app.delete("/delete-producto", (req, res) => {
     console.log(producto.id_producto);
     res.json(producto)}); */
 
+app.get("/get-venta", async (request, response) => {
+        const[rows, fields] = await connection.execute("SELECT * FROM ventas");
+        console.log({data:rows});
+        response.json({data: rows});
+});
+    
+app.post("/add-venta", async(req, res) => {
+    try{
+        console.log(req.body)
+        const {id_venta, fecha_venta, doc_identificacion_cliente, nombre_cliente, estado_producto, id_prod, id_user} = req.body;
+        await connection.execute(`INSERT INTO ventas (id_venta, fecha_venta, doc_identificacion_cliente, nombre_cliente, estado_producto, id_prod, id_user) VALUES ('${id_venta}','${fecha_venta}','${doc_identificacion_cliente}','${nombre_cliente}','${estado_producto}','${id_prod}','${id_user}')`);
+        res.json({status: "OK"});
+    }
+    catch (error) {
+        console.log(error);
+        res.json(error)
+    }
+})
+
+app.get("/get-venta/:id_venta", async (request, response) => {
+    const id_venta = request.params.id_venta;
+    const consulta = 'SELECT id_venta, fecha_venta, doc_identificacion_cliente, nombre_cliente, estado_producto, id_prod, id_user FROM venta WHERE id_venta = \''+id_venta+'\'';
+    console.log(consulta);
+    const [rows, fields] = await connection.execute(consulta);
+    /* response.json({status:"OK"}); */
+    console.log({data:rows});
+    response.json({data: rows});
+
+});
+
+app.get("/get-ventas/:documento_identificacion_cliente", async (request, response) => {
+    const documento_identificacion_cliente = request.params.documento_identificacion_cliente;
+    const consulta = 'SELECT id_venta, valor_total_venta, id_producto, cantidad, precio_unitario_producto, fecha_venta, documento_identificacion_cliente, nombre_cliente FROM ventas WHERE documento_identificacion_cliente = \''+documento_identificacion_cliente+'\'';
+    console.log(consulta);
+    const [rows, fields] = await connection.execute(consulta);
+    /* response.json({status:"OK"}); */
+    console.log({data:rows});
+    response.json({data: rows});
+
+});
+
+app.get("/get-ventas/:nombre_cliente", async (request, response) => {
+    const nombre_cliente = request.params.nombre_cliente;
+    const consulta = 'SELECT id_venta, valor_total_venta, id_producto, cantidad, precio_unitario_producto, fecha_venta, documento_identificacion_cliente, nombre_cliente FROM nombre_cliente WHERE nombre_cliente = \''+nombre_cliente+'\'';
+    console.log(consulta);
+    const [rows, fields] = await connection.execute(consulta);
+    /* response.json({status:"OK"}); */
+    console.log({data:rows});
+    response.json({data: rows});
+
+});
+
 
 app.listen(port, async() => {
     connection = await mysql.createConnection({

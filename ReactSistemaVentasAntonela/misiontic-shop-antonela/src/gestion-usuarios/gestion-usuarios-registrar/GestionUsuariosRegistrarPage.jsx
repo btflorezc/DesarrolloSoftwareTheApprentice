@@ -33,6 +33,7 @@ const GestionUsuariosRegistrarPage = () => {
     }
     return (
         <div className='container' >
+            <h4>Gestión de Usuarios: Registrar Usuario</h4>
             <form>
                 <div className="mb-3">
                     <label for="id_usuarios">ID Usuario*:</label>
