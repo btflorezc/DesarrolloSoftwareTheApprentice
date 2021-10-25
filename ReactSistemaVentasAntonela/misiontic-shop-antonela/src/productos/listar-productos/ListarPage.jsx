@@ -9,7 +9,7 @@ function ListarPage() {
   
   const getProductos = async () => {
     try {
-      const response = await fetch("http://localhost:3001/get-producto");
+      const response = await fetch("http://localhost:3001/get-product");
       const jsonResponse = await response.json();
       const responseProductos = jsonResponse.data;
       const listProductos = responseProductos.map((productos) =>

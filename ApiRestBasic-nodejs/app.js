@@ -13,11 +13,12 @@ let connection;
 app.use(express.json());
 app.use(cors({ origin: true }));
 
-app.get("/get-producto", async (request, response) => {
-    const [rows, fields] = await connection.execute("SELECT * FROM productos");
+app.get("/get-product", async (request, response) => {
+    const [rows, fields] = await connection.execute("SELECT * FROM products");
     console.log({ data: rows });
     response.json({ data: rows });
 });
+
 
 /* app.post("/add-producto", async (req, res) => {
     const productoObj = { id_producto, descripcion_producto, estado_producto, precio_producto } = req.body;
@@ -27,11 +28,11 @@ app.get("/get-producto", async (request, response) => {
 }); */
 
 
-app.post("/add-producto", async (req, res) => {
+app.post("/add-product", async (req, res) => {
     try {
         console.log(req.body)
         const { id_producto, descripcion_producto, estado_producto, precio_producto } = req.body;
-        await connection.execute(`INSERT INTO productos (id_producto, descripcion_producto, estado_producto, precio_producto) VALUES ('${id_producto}','${descripcion_producto}','${estado_producto}','${precio_producto}')`);
+        await connection.execute(`INSERT INTO products (id_producto, descripcion_producto, estado_producto, precio_producto) VALUES ('${id_producto}','${descripcion_producto}','${estado_producto}','${precio_producto}')`);
         res.json({ status: "OK" });
     }
     catch (error) {
@@ -45,7 +46,7 @@ app.put('/update/id_producto', async (req, res) => {
     try {
 
         const { id_producto, descripcion_producto, estado_producto, precio_producto } = req.body;
-        await connection.execute('UPDATE productos SET descripcion_producto = \'' + descripcion_producto + '\', estado_producto = \'' + estado_producto + '\', precio_producto = \'' + precio_producto + '\' WHERE id_producto = \'' + id_producto + '\'')
+        await connection.execute('UPDATE products SET descripcion_producto = \'' + descripcion_producto + '\', estado_producto = \'' + estado_producto + '\', precio_producto = \'' + precio_producto + '\' WHERE id_producto = \'' + id_producto + '\'')
         res.json({ status: "OK" });
         console.log("Producto actualizado");
     }
@@ -55,9 +56,9 @@ app.put('/update/id_producto', async (req, res) => {
     }
 })
 
-app.get("/get-producto/:id_producto", async (request, response) => {
+app.get("/get-product/:id_producto", async (request, response) => {
     const id_producto = request.params.id_producto;
-    const consulta = 'SELECT id_producto, descripcion_producto, estado_producto, precio_producto FROM productos WHERE id_producto = \'' + id_producto + '\'';
+    const consulta = 'SELECT id_producto, descripcion_producto, estado_producto, precio_producto FROM products WHERE id_producto = \'' + id_producto + '\'';
     console.log(consulta);
     const [rows, fields] = await connection.execute(consulta);
     /* response.json({status:"OK"}); */

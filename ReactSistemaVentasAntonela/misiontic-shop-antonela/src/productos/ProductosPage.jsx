@@ -14,7 +14,7 @@ const ProductosPage = () => {
             precio_producto: precio_producto,
             
         }
-        const response = await fetch('http://localhost:3001/add-producto', {
+        const response = await fetch('http://localhost:3001/add-product', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'

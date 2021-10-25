@@ -35,8 +35,8 @@ function ActualizarProductosPage() {
     const getProducto = async (search) => {
         try {
             limpiarCampos();
-            var src = document.getElementById('search').value;
-            const url = "http://localhost:3001/get-producto" + src;
+            var src1 = document.getElementById('search').value;
+            const url = "http://localhost:3001/get-product/" + src1;
             console.log(url);
             const response = await fetch(url);
             const jsonResponse = await response.json();
@@ -77,11 +77,11 @@ function ActualizarProductosPage() {
                 </div>
                 <div className="mb-3">
                     <label for="estado_producto">Estado Producto*:</label>
-                    <input type="number" className="form-control" id="estado_producto" name="estado_producto" /* value={num} */ /* onChange={(e) => setNum_Identificacion(e.target.value) *//* } */ />
+                    <input type="text" className="form-control" id="estado_producto" name="estado_producto" /* value={num} */ /* onChange={(e) => setNum_Identificacion(e.target.value) *//* } */ />
                 </div>
                 <div className="mb-3">
                     <label for="precio_producto">Precio Producto*:</label>
-                    <input type="text" className="form-control" id="precio_producto" name="precio_producto" /* value= {nombre} */ /* onChange={(e) => setNombre_Usuario(e.target.value) *//* } */ />
+                    <input type="number" className="form-control" id="precio_producto" name="precio_producto" /* value= {nombre} */ /* onChange={(e) => setNombre_Usuario(e.target.value) *//* } */ />
                 </div>
                 
                 <button type="button" onClick={addProducto} className="btn btn-outline-success">Actualizar</button>
