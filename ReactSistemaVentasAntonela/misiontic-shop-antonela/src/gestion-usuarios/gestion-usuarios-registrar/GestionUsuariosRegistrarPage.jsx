@@ -10,6 +10,7 @@ const GestionUsuariosRegistrarPage = () => {
     const [email, setEmail] = useState('');
     const [telefono_usuario, setTelefono_Usuario] = useState(0);
     const addUsuario = async() => {
+        alert("La usuario se ha registrado correctamente.");
         const usuarioData = {
             id_usuarios: id_usuarios,
             tipo_documento: tipo_documento,
@@ -33,6 +34,7 @@ const GestionUsuariosRegistrarPage = () => {
     }
     return (
         <div className='container' >
+            <h4>Gestión de Usuarios: Registrar Usuario</h4>
             <form>
                 <div className="mb-3">
                     <label for="id_usuarios">ID Usuario*:</label>

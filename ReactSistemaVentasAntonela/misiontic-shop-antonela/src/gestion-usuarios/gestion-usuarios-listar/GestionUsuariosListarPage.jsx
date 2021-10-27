@@ -65,8 +65,9 @@ function GestionUsuariosListarPage() {
     
         return (
             <div className="container">
+                <h4>Gestión de Usuarios: Usuarios</h4>
                 <table class="table">
-                    <thead>
+                      <thead>
                         <tr>
                             <th scope="col">ID Usuario</th>
                             <th scope="col">Tipo Documento</th>

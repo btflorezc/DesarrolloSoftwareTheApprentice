@@ -1,6 +1,5 @@
 import React from "react";
-import ProductosPage from "./productos/ProductosPage";
-
+/* import ProductosPage from "./productos/ProductosPage"; */
 import AdministradorVentasRegistrarPage from "./admon-ventas/admon-ventas-registrar/AdministradorVentasRegistrarPage";
 import AdministradorVentasActualizarPage from "./admon-ventas/admon-ventas-actualizar/AdministradorVentasActualizarPage";
 import AdministradorVentasBuscarPage from "./admon-ventas/admon-ventas-buscar/AdministradorVentasBuscarPage";
@@ -12,11 +11,10 @@ import GestionUsuariosListarPage from "./gestion-usuarios/gestion-usuarios-lista
 import ActualizarProductosPage from "./productos/actualizar-productos/ActualizarProductosPage";
 import ListarPage from "./productos/listar-productos/ListarPage";
 import HomePage from "./home/HomePage";
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import NavbarComponent from "./shared/components/navbar/NavbarComponent";
 import ForbidenComponent from "./shared/components/forbiden/ForbidenComponent";
 import { useAuth0 } from "@auth0/auth0-react";
-
 /* import grantAccess from "./productos/listar-productos/ListarPage"; */
 
 function App() {
@@ -26,19 +24,18 @@ const {isAuthenticated} = useAuth0();
     <Router>
       <NavbarComponent></NavbarComponent>
       <Switch>
-        <Route path="/" exact>
-          <HomePage />
+      <Route path="/" exact>
+          <HomePage/>
         </Route>
-        <Route path="/productos" exact>
-          <ProductosPage />
-        </Route>
+{/*         <Route path="/productos" exact>
+        {grantAccess() ? <ProductosPage />: <ForbidenComponent /> }
+        </Route> */}
         <Route path="/productos/actualizar-productos" exact>
-          <ActualizarProductosPage /> 
+        {isAuthenticated ?<ActualizarProductosPage />: <ForbidenComponent /> }
         </Route>
         <Route path="/productos/listar-productos" exact>
           <ListarPage />
         </Route>
-        
         <Route path="/admon-ventas/admon-ventas-listar" exact>
           <AdministradorVentasListarPage />
         </Route>
@@ -67,7 +64,7 @@ const {isAuthenticated} = useAuth0();
           <ForbidenComponent />
         </Route>
       </Switch>
-
+    
     </Router>
   );
 }

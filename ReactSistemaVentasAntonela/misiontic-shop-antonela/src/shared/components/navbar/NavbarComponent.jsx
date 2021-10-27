@@ -32,6 +32,7 @@ function NavbarComponent(props) {
                                 <li><Link to="/productos/listar-productos/" className="dropdown-item" href="#">Listar Productos</Link></li>
                             </ul>
                         </li>
+                        
                         <li className="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Administrar Ventas
@@ -48,10 +49,10 @@ function NavbarComponent(props) {
                                 Gestión de Usuarios
                             </a>
                             <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                                <li><Link to="/gestion-usuarios/gestion-usuarios-listar/" className="dropdown-item" href="#">Listar Usuarios</Link></li>
                                 <li><Link to="/gestion-usuarios/gestion-usuarios-registrar/" className="dropdown-item" href="#">Registrar Usuario</Link></li>
                                 <li><Link to="/gestion-usuarios/gestion-usuarios-actualizar/" className="dropdown-item" href="#">Actualizar Usuario</Link></li>
                                 <li><Link to="/gestion-usuarios/gestion-usuarios-eliminar/" className="dropdown-item" href="#">Eliminar Usuario</Link></li>
-                                <li><Link to="/gestion-usuarios/gestion-usuarios-listar/" className="dropdown-item" href="#">Listar Usuarios</Link></li>
                             </ul>
                         </li>
                     </div>
