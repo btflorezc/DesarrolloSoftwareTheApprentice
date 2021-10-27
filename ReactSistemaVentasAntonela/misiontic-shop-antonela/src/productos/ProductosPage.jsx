@@ -1,6 +1,10 @@
-import React, { useState } from 'react'
+import { useAuth0 } from '@auth0/auth0-react';
+import React, { useState, useEffect, Fragment } from 'react'
+import ForbidenComponent from '../shared/components/forbiden/ForbidenComponent';
 
 const ProductosPage = () => {
+    const {isAuthenticated} =useAuth0();
+    const [validUser, setValidUser] =useState(false);
     const [id_producto, setId_Producto] = useState(0);
     const [descripcion_producto, setDescripcion_Producto] = useState('');
     const [estado_producto, setEstado_Producto] = useState(0);
@@ -25,9 +29,22 @@ const ProductosPage = () => {
           console.log(jsonResponse);
       
     }
-    return (
+    const grantAccess=()=>{
+        if(localStorage.getItem("state")=="administrador"){
+          setValidUser(true)
+        }else{
+          setValidUser(false)
+        }
+      }
+            
+      
+      useEffect(() => {
+        grantAccess();
+        
+      },[isAuthenticated,validUser]);
+        return (
         <div className='container' >
-            <form>
+            {validUser?<form>
                 <div className="mb-3">
                     <label for="id_producto">ID Producto*:</label>
                     <input type="number" className="form-control" id="id_usuarios" name="id_producto" onChange={(e) => setId_Producto(e.target.value) } />
@@ -46,7 +63,7 @@ const ProductosPage = () => {
                 </div>
                 
                 <button type="button" onClick={addProducto} class="btn btn-outline-success">Registrar</button>
-            </form>
+            </form>:<ForbidenComponent/>}
         </div>
     )
 }

@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import { useAuth0 } from '@auth0/auth0-react';
+import React, { useState, useEffect } from 'react'
+import ForbidenComponent from '../../shared/components/forbiden/ForbidenComponent';
 
 function GestionUsuariosActualizarPage() {
-
-    const limpiarCampos  = async (search) =>{
+    const { isAuthenticated } = useAuth0();
+    const [validUser, setValidUser] = useState(false);
+    const limpiarCampos = async (search) => {
         document.getElementById('id_usuarios').value = "";
         document.getElementById('tipo_documento').value = "";
         document.getElementById('num_identificacion').value = "";
@@ -15,7 +18,7 @@ function GestionUsuariosActualizarPage() {
 
 
     const addUsuario = async () => {
-        alert("La usuario se ha actualizado correctamente.");  
+        alert("La usuario se ha actualizado correctamente.");
         const usuarioData = {
             id_usuarios: document.getElementById('id_usuarios').value,
             tipo_documento: document.getElementById('tipo_documento').value,
@@ -45,7 +48,7 @@ function GestionUsuariosActualizarPage() {
             console.log(url);
             const response = await fetch(url);
             const jsonResponse = await response.json();
-           
+
             console.log(jsonResponse);
             document.getElementById('id_usuarios').value = jsonResponse.data[0].id_usuarios;
             document.getElementById('tipo_documento').value = jsonResponse.data[0].tipo_documento;
@@ -62,19 +65,28 @@ function GestionUsuariosActualizarPage() {
             console.log(error)
         }
     }
+    const grantAccess = () => {
+        if (localStorage.getItem("state") == "administrador") {
+            setValidUser(true)
+        } else {
+            setValidUser(false)
+        }
+    }
 
+
+    useEffect(() => {
+        grantAccess();
+        
+    }, [isAuthenticated, validUser]);
     return (
-
-
-
-        <>
-        <h4>Gestión de Usuarios: Actualizar Usuario</h4>
-        <div className='container'></div><div class="input-group">
-            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                aria-describedby="search-addon" id="search" name="search" />
-            <button type="button" onClick={getUsuarios} class="btn btn-outline-primary" id="boton">Buscar Id Usuario</button>
-        </div>
-            <form>
+        <div className="container">
+            <h4>Gestión de Usuarios: Actualizar Usuario</h4>
+            <div className='container'></div><div class="input-group">
+                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                    aria-describedby="search-addon" id="search" name="search" />
+                <button type="button" onClick={getUsuarios} class="btn btn-outline-primary" id="boton">Buscar Id Usuario</button>
+            </div>
+            {validUser?<form>
                 <div className="mb-3">
                     <label for="id_usuarios">ID Usuario*:</label>
                     <input type="number" class="form-control" id="id_usuarios" name="id_usuarios" disabled="true" /* value = {tipo} */ /* onChange={(e) => setTipo_Documento(e.target.value) *//* } */ />
@@ -107,8 +119,10 @@ function GestionUsuariosActualizarPage() {
                     <label for="telefono_usuario">Número Contacto*:</label>
                     <input type="texto" className="form-control" id="telefono_usuario" name="telefono_usuario" /* value={telefono} */ /* onChange={(e) => setTelefono_Usuario(e.target.value) *//* } */ />
                 </div>
-                <button type="button" onClick={addUsuario} class="btn btn-outline-success">Actualizar</button>
-            </form></>
+                <button type="submit" onClick={addUsuario} class="btn btn-outline-success">Actualizar</button>
+            </form>:<ForbidenComponent/>}
+        </div>
     )
+
 }
 export default GestionUsuariosActualizarPage

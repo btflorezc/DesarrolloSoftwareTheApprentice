@@ -57,19 +57,9 @@ function HomePage() {
     
     return (
         <div className="container">
-        {validUser?<table className="table">
-          <thead>
-            <tr>
-              <th scope="col">id</th>
-              <th scope="col">Descripción</th>
-              <th scope="col">Estado</th>
-              <th scope="col">Precio</th>
-            </tr>
-          </thead>
-          <tbody>
-            {}
-          </tbody>
-        </table>:<ForbidenComponent/>}
+        {validUser?<h1>
+          Bienvenido al sistema de ventas de Antonela Respostería
+        </h1>:<ForbidenComponent/>}
       </div>
     )
     

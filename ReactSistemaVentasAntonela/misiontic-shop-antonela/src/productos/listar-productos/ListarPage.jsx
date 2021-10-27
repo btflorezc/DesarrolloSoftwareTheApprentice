@@ -31,7 +31,7 @@ function ListarPage() {
   }
  
   const grantAccess=()=>{
-    if(localStorage.getItem("state")=="user"){
+    if(localStorage.getItem("state")=="administrador"){
       setValidUser(true)
     }else{
       setValidUser(false)

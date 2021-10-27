@@ -17,6 +17,14 @@ function ActualizarProductosPage() {
 
     }
 
+    const limpiarCampos2 = async (search2) => {
+        document.getElementById('id_producto').value = "";
+        document.getElementById('descripcion_producto').value = "";
+        document.getElementById('estado_producto').value = "";
+        document.getElementById('precio_producto').value = "";
+
+    }
+
 
     const addProducto = async () => {
         /* const Swal = await require('sweetalert2');
@@ -77,6 +85,30 @@ function ActualizarProductosPage() {
         }
     }
 
+    const getProducto2 = async (search2) => {
+        try {
+            
+            limpiarCampos2();
+            var src2 = document.getElementById('search2').value;
+            const url2 = "http://localhost:3001/get-product2/" + src2;
+            console.log(url2);
+            const response = await fetch(url2);
+            const jsonResponse = await response.json();
+
+            console.log(jsonResponse);
+            document.getElementById('id_producto').value = jsonResponse.data[0].id_producto;
+            document.getElementById('descripcion_producto').value = jsonResponse.data[0].descripcion_producto;
+            document.getElementById('estado_producto').value = jsonResponse.data[0].estado_producto;
+            document.getElementById('precio_producto').value = jsonResponse.data[0].precio_producto;
+
+
+            console.log(jsonResponse.data);
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         
 
@@ -87,6 +119,11 @@ function ActualizarProductosPage() {
                 <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
                     aria-describedby="search-addon" id="search" name="search" />
                 <button type="button" onClick={getProducto} className="btn btn-outline-primary" id="boton">Buscar Id Producto</button>
+            </div>
+            <div className='container'></div><div class="input-group">
+                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                    aria-describedby="search-addon" id="search2" name="search2" />
+                <button type="button" onClick={getProducto2} className="btn btn-outline-primary" id="boton">Buscar Descripción Producto</button>
             </div>
             <form>
                 <div className="mb-3">
@@ -106,7 +143,7 @@ function ActualizarProductosPage() {
                     <input type="number" className="form-control" id="precio_producto" name="precio_producto" /* value= {nombre} */ /* onChange={(e) => setNombre_Usuario(e.target.value) *//* } */ />
                 </div>
 
-                <button type="submit" onClick={addProducto}  className="btn1" >Actualizar</button>
+                <button type="submit" onClick={addProducto}  className="btn btn-outline-primary" >Actualizar</button>
                 
                 
                 
