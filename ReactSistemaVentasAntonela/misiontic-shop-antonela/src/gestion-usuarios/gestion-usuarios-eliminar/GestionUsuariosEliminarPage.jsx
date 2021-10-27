@@ -14,6 +14,7 @@ function GestionUsuariosEliminarPage(){
         }
 
         const deleteUsuario = async () => {
+            alert("La usuario se ha eliminado correctamente.");
             try{
                 var id_usuarios_eliminar = document.getElementById('id_usuarios').value;
                 const url="http://localhost:3001/delete-usuarios/"+id_usuarios_eliminar;

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+
 function AdministradorVentasActualizarPage() {
 
     const limpiarCampos1  = async (search1) =>{
@@ -42,6 +43,9 @@ function AdministradorVentasActualizarPage() {
     }
 
     const addVenta = async () => {
+
+        alert("La venta se ha actualizado correctamente.");
+
         const ventaData = {
             id_venta: document.getElementById('id_venta').value,
             valor_total_venta: document.getElementById('valor_total_venta').value,
@@ -61,6 +65,7 @@ function AdministradorVentasActualizarPage() {
         });
         const jsonResponse = await response.json();
         console.log(jsonResponse);
+
     }
 
     const getVentas1 = async (search1) => {

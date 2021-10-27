@@ -10,6 +10,7 @@ const AdministradorVentasRegistrarPage = () => {
     const [documento_identificacion_cliente, setDocumentoIdentificacionCliente] = useState('');
     const [nombre_cliente, setNombreCliente] = useState('');
     const addVenta = async() => {
+        alert("La venta se ha registrado correctamente.");        
         const ventaData = {
             id_venta: id_venta,
             valor_total_venta: valor_total_venta,
@@ -37,7 +38,7 @@ const AdministradorVentasRegistrarPage = () => {
             <form>
                 <div className="mb-3">
                     <label for="id_venta">ID Venta*:</label>
-                    <input type="number" className="form-control" id="id_venta" name="id_venta" onChange={(e) => setIdVenta(e.target.value) }/>
+                    <input type="number" className="form-control" id="id_venta" name="id_venta" disabled="true" onChange={(e) => setIdVenta(e.target.value) }/>
                 </div>
                 <div className="mb-3">
                     <label for="valor_total_venta">Valor Total Venta*:</label>

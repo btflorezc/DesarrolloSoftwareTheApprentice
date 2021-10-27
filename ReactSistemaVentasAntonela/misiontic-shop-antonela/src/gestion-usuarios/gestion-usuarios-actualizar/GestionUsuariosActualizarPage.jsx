@@ -15,6 +15,7 @@ function GestionUsuariosActualizarPage() {
 
 
     const addUsuario = async () => {
+        alert("La usuario se ha actualizado correctamente.");  
         const usuarioData = {
             id_usuarios: document.getElementById('id_usuarios').value,
             tipo_documento: document.getElementById('tipo_documento').value,
